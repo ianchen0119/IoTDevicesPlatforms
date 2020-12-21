@@ -1,0 +1,21 @@
+{
+  "name": "AnalogKeypad",
+  "keywords": "Analog Keypad 4x4 4x3",
+  "description": "Arduino Library for (Robotdyn) 4x4 and 4x3 AnalogKeypad.",
+  "authors":
+  [
+    {
+      "name": "Rob Tillaart",
+      "email": "Rob.Tillaart@gmail.com",
+      "maintainer": true
+    }
+  ],
+  "repository":
+  {
+    "type": "git",
+    "url": "https://github.com/RobTillaart/AnalogKeypad"
+  },
+  "version":"0.1.4",
+  "frameworks": "arduino",
+  "platforms": "*"
+}

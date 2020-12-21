@@ -1,0 +1,21 @@
+{
+  "name": "PrintSize",
+  "keywords": "Size,print,length,alignment",
+  "description": "Library to determine size of a printed variable.",
+  "authors":
+  [
+    {
+      "name": "Rob Tillaart",
+      "email": "Rob.Tillaart@gmail.com",
+      "maintainer": true
+    }
+  ],
+  "repository":
+  {
+    "type": "git",
+    "url": "https://github.com/RobTillaart/PrintSize.git"
+  },
+  "version":"0.2.2",
+  "frameworks": "arduino",
+  "platforms": "*"
+}
