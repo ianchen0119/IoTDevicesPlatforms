@@ -10,10 +10,10 @@ String getStr;
 int led=13;
 
 //請輸入自己WiFi熱點的名稱
-#define SSID "NCTU" // Use you own SSID
+#define SSID "XXXX" // Use you own SSID
 
 //請輸入自己WiFi熱點的密碼
-#define PASS "casper1014" // Use you own Password
+#define PASS "XXXX" // Use you own Password
   
   
 void setup() {

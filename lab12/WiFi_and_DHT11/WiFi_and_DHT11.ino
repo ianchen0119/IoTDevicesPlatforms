@@ -1,23 +1,18 @@
 #include <SoftwareSerial.h>
-#include "dht.h"
-#define dht_dpin A0 
-
-dht DHT;
-
 #define WiFi_TX 2
 #define WiFi_RX 3
 SoftwareSerial WiFi_Serial(WiFi_TX,WiFi_RX);
 int flag = 0;
 
 //請輸入自己WiFi熱點的名稱
-#define SSID "zeze"
+#define SSID "Neil_2"
 
 //請輸入自己WiFi熱點的密碼
-#define PASS "iphonewifiau4a83"
+#define PASS "09121021"
 
 #define IP "api.thingspeak.com"
 // GET /update?key=[THINGSPEAK_KEY]&field1=[data 1]&filed2=[data 2]...;
-String GET = "GET /update?key=1IHD5LW1C7CA5ANE"; //請將key=之後的16碼改為自己的API key
+String GET = "GET /update?key=U5RQ8FIUOS89J7RK"; //請將key=之後的16碼改為自己的API key
 
 void setup() {
   Serial.begin(9600);
@@ -42,23 +37,19 @@ void setup() {
 }
 
 void loop() {
-  DHT.read11(dht_dpin);
-  delay(50);
-  double Hum = DHT.humidity; //濕度
-  double Temp = DHT.temperature; //溫度
-  int sensorValue = analogRead(A1);
-  if (isnan(Hum)||isnan(Temp)||isnan(sensorValue)){ //確定溫濕度值存在
+  double Hum = 66; //濕度
+  double Temp = 20.5; //溫度
+  if (isnan(Hum)||isnan(Temp)){ //確定溫濕度值存在
     Serial.println("Failed to read from DHT sensor!");
     return;
   }
 
   else{
-    String HH,TT,VV;
+    String HH,TT;
     HH=String(Hum); //將濕度值轉換成字串型態的資料
     TT=String(Temp); //將溫度值轉換成字串型態的資料
-    VV=String(sensorValue);
     
-    updateDHT11(TT,HH,VV); //將溫濕度資料傳至雲端平台
+    updateDHT11(TT,HH); //將溫濕度資料傳至雲端平台
 
     Serial.print("Humidity: "); 
     Serial.print( HH );
@@ -66,13 +57,11 @@ void loop() {
     Serial.print("Temperature: "); 
     Serial.print( TT );
     Serial.println(" *C\t");
-    Serial.print("Resistor: "); 
-    Serial.print( VV );
   }
   delay(5000);
 }
 
-void updateDHT11(String T, String H, String V){
+void updateDHT11(String T, String H){
   String cmd = "AT+CIPSTART=\"TCP\",\""; //建立TCP連線
   cmd += IP;
   cmd += "\",80";
@@ -82,7 +71,7 @@ void updateDHT11(String T, String H, String V){
     Serial.println("RECEIVED: TCP Connect Error");
     return;
   }
-  cmd = GET + "&field1=" + T + "&field2=" + H + "&field3=" + V +"\r\n";
+  cmd = GET + "&field1=" + T + "&field2=" + H +"\r\n";
   WiFi_Serial.print("AT+CIPSEND="); //傳送資料的指令
   WiFi_Serial.println(cmd.length()); //資料的長度
   if(WiFi_Serial.find(">")){ //確定WiFi模組有接收到指令
